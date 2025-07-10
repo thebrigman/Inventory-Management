@@ -39,39 +39,85 @@ public class BootStrapData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-       /*
-        OutsourcedPart o= new OutsourcedPart();
-        o.setCompanyName("Western Governors University");
-        o.setName("out test");
-        o.setInv(5);
-        o.setPrice(20.0);
-        o.setId(100L);
-        outsourcedPartRepository.save(o);
-        OutsourcedPart thePart=null;
-        List<OutsourcedPart> outsourcedParts=(List<OutsourcedPart>) outsourcedPartRepository.findAll();
-        for(OutsourcedPart part:outsourcedParts){
-            if(part.getName().equals("out test"))thePart=part;
+        if (outsourcedPartRepository.count() == 0) {
+            OutsourcedPart burgerPatty= new OutsourcedPart();
+            burgerPatty.setCompanyName("Samson Foods");
+            burgerPatty.setName("burger patty");
+            burgerPatty.setInv(20);
+            burgerPatty.setPrice(2.0);
+            burgerPatty.setId(100L);
+            outsourcedPartRepository.save(burgerPatty);
+
+            OutsourcedPart chickenBreast= new OutsourcedPart();
+            chickenBreast.setCompanyName("Samson Foods");
+            chickenBreast.setName("chicken breast");
+            chickenBreast.setInv(20);
+            chickenBreast.setPrice(2.0);
+            chickenBreast.setId(101L);
+            outsourcedPartRepository.save(chickenBreast);
+
+            OutsourcedPart cheese= new OutsourcedPart();
+            cheese.setCompanyName("Samson Foods");
+            cheese.setName("cheese");
+            cheese.setInv(20);
+            cheese.setPrice(.50);
+            cheese.setId(102L);
+            outsourcedPartRepository.save(cheese);
+
+            OutsourcedPart bacon= new OutsourcedPart();
+            bacon.setCompanyName("Samson Foods");
+            bacon.setName("bacon");
+            bacon.setInv(40);
+            bacon.setPrice(1.0);
+            bacon.setPrice(1.00);
+            cheese.setId(103L);
+            outsourcedPartRepository.save(bacon);
+
+            OutsourcedPart potatoBun= new OutsourcedPart();
+            potatoBun.setCompanyName("Samson Foods");
+            potatoBun.setName("potato bun");
+            potatoBun.setInv(20);
+            potatoBun.setPrice(1.0);
+            potatoBun.setPrice(1.00);
+            potatoBun.setId(104L);
+            outsourcedPartRepository.save(potatoBun);
+
         }
 
-        System.out.println(thePart.getCompanyName());
-        */
-        List<OutsourcedPart> outsourcedParts=(List<OutsourcedPart>) outsourcedPartRepository.findAll();
-        for(OutsourcedPart part:outsourcedParts){
-            System.out.println(part.getName()+" "+part.getCompanyName());
-        }
+        if (productRepository.count() == 0) {
+            Product classicBurger= new Product("classic burger",3.0,0);
+            Product chickenSandwich= new Product("chicken sandwich",3.0,0);
+            Product baconBurger= new Product("bacon burger",4.0,0);
+            Product cheeseBurger= new Product("cheese burger",3.50,0);
+            Product baconCheeseBurger= new Product("bacon cheese burger",4.50,0);
 
-        /*
-        Product bicycle= new Product("bicycle",100.0,15);
-        Product unicycle= new Product("unicycle",100.0,15);
-        productRepository.save(bicycle);
-        productRepository.save(unicycle);
-        */
+            productRepository.save(classicBurger);
+            productRepository.save(chickenSandwich);
+            productRepository.save(baconBurger);
+            productRepository.save(cheeseBurger);
+            productRepository.save(baconCheeseBurger);
+        }
 
         System.out.println("Started in Bootstrap");
         System.out.println("Number of Products"+productRepository.count());
         System.out.println(productRepository.findAll());
         System.out.println("Number of Parts"+partRepository.count());
         System.out.println(partRepository.findAll());
+
+
+//        OutsourcedPart thePart=null;
+//        List<OutsourcedPart> outsourcedParts=(List<OutsourcedPart>) outsourcedPartRepository.findAll();
+//        for(OutsourcedPart part:outsourcedParts){
+//            if(part.getName().equals("out test"))thePart=part;
+//        }
+//
+//        System.out.println(thePart.getCompanyName());
+//
+//        List<OutsourcedPart> outsourcedParts=(List<OutsourcedPart>) outsourcedPartRepository.findAll();
+//        for(OutsourcedPart part:outsourcedParts){
+//            System.out.println(part.getName()+" "+part.getCompanyName());
+//        }
+
 
     }
 }
