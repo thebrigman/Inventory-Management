@@ -24,3 +24,18 @@ Add an “About” page to the application to describe your chosen customer’s 
 Add a sample inventory appropriate for your chosen store to the application. You should have five parts and five products in your sample inventory and should not overwrite existing data in the database.
 > BootStrapData:
 >- lines 42 - 98 added 5 parts and 5 products and if statement.
+
+## Task F
+Add a “Buy Now” button to your product list. Your “Buy Now” button must meet each of the following parameters:
+•  The “Buy Now” button must be next to the buttons that update and delete products.
+• The button should decrement the inventory of that product by one. It should not affect the inventory of any of the associated parts.
+•  Display a message that indicates the success or failure of a purchase.
+
+> mainscreen.html:
+>- Lines 21-27: success and failure message added
+>- Line 96: buynow button added
+
+> AddProductController:
+>- Lines 178 - 196: created a buyProduct method with buyproduct GET endpoint in AddProductController.
+   (buyProduct fetches the id of the product decrements the inventory and sends success message.
+   If inventory is 0, a failure message is sent. The message is displayed in mainscreen.html)

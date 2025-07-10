@@ -19,6 +19,13 @@
     <h1>The Burger House</h1>
 </div>
 
+<div th:if="${successMessage}" class="alert alert-success" style="text-align: center; font-weight: bold;" >
+    <p th:text="${successMessage}"></p>
+</div>
+<div th:if="${failureMessage}" class="alert alert-danger" style="text-align: center; font-weight: bold;">
+    <p th:text="${failureMessage}"></p>
+</div>
+
 <div class="container">
     <a class="btn btn-primary" th:href="@{about}">About</a>
     <hr>
@@ -86,6 +93,7 @@
             <td><a th:href="@{/showProductFormForUpdate(productID=${tempProduct.id})}" class="btn btn-primary btn-sm mb-3">Update</a>
                 <a th:href="@{/deleteproduct(productID=${tempProduct.id})}" class="btn btn-primary btn-sm mb-3"
                    onclick="if(!(confirm('Are you sure you want to delete this product?')))return false">Delete</a>
+                <a th:href="@{/buyproduct(productID=${tempProduct.id})}" class="btn btn-primary btn-sm mb-3">Buy Now</a>
             </td>
         </tr>
         </tbody>
