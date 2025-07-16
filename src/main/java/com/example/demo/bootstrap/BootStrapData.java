@@ -46,6 +46,8 @@ public class BootStrapData implements CommandLineRunner {
             burgerPatty.setInv(20);
             burgerPatty.setPrice(2.0);
             burgerPatty.setId(100L);
+            burgerPatty.setMinInv(5);
+            burgerPatty.setMaxInv(50);
             outsourcedPartRepository.save(burgerPatty);
 
             OutsourcedPart chickenBreast= new OutsourcedPart();
@@ -54,6 +56,8 @@ public class BootStrapData implements CommandLineRunner {
             chickenBreast.setInv(20);
             chickenBreast.setPrice(2.0);
             chickenBreast.setId(101L);
+            chickenBreast.setMinInv(5);
+            chickenBreast.setMaxInv(50);
             outsourcedPartRepository.save(chickenBreast);
 
             OutsourcedPart cheese= new OutsourcedPart();
@@ -62,6 +66,8 @@ public class BootStrapData implements CommandLineRunner {
             cheese.setInv(20);
             cheese.setPrice(.50);
             cheese.setId(102L);
+            cheese.setMinInv(5);
+            cheese.setMaxInv(50);
             outsourcedPartRepository.save(cheese);
 
             OutsourcedPart bacon= new OutsourcedPart();
@@ -71,6 +77,8 @@ public class BootStrapData implements CommandLineRunner {
             bacon.setPrice(1.0);
             bacon.setPrice(1.00);
             cheese.setId(103L);
+            bacon.setMinInv(5);
+            bacon.setMaxInv(50);
             outsourcedPartRepository.save(bacon);
 
             OutsourcedPart potatoBun= new OutsourcedPart();
@@ -80,6 +88,8 @@ public class BootStrapData implements CommandLineRunner {
             potatoBun.setPrice(1.0);
             potatoBun.setPrice(1.00);
             potatoBun.setId(104L);
+            potatoBun.setMinInv(5);
+            potatoBun.setMaxInv(50);
             outsourcedPartRepository.save(potatoBun);
 
         }

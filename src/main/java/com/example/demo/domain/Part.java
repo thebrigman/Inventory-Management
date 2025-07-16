@@ -1,9 +1,12 @@
 package com.example.demo.domain;
 
 import com.example.demo.validators.ValidDeletePart;
+import com.example.demo.validators.ValidInventory;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,15 +22,25 @@ import java.util.Set;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="part_type",discriminatorType = DiscriminatorType.INTEGER)
 @Table(name="Parts")
+@ValidInventory
 public abstract class Part implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
+    @NotNull(message = "Name is required")
     String name;
+    @NotNull(message = "Price is required")
     @Min(value = 0, message = "Price value must be positive")
     double price;
+    @NotNull(message = "Inventory is required")
     @Min(value = 0, message = "Inventory value must be positive")
-    int inv;
+    Integer inv;
+    @NotNull(message = "Max inventory is required")
+    @Min(value = 0, message = "Max Inventory value must be positive")
+    Integer maxInv;
+    @NotNull(message = "Min inventory is required")
+    @Min(value = 0, message = "Min Inventory value must be positive")
+    Integer minInv;
 
     @ManyToMany
     @JoinTable(name="product_part", joinColumns = @JoinColumn(name="part_id"),
@@ -37,17 +50,33 @@ public abstract class Part implements Serializable {
     public Part() {
     }
 
-    public Part(String name, double price, int inv) {
+    public Part(String name, double price, Integer inv) {
         this.name = name;
         this.price = price;
         this.inv = inv;
     }
 
-    public Part(long id, String name, double price, int inv) {
+    public Part(long id, String name, double price, Integer inv) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.inv = inv;
+    }
+
+    public Integer getMaxInv() {
+        return maxInv;
+    }
+
+    public void setMaxInv(Integer maxInv) {
+        this.maxInv = maxInv;
+    }
+
+    public Integer getMinInv() {
+        return minInv;
+    }
+
+    public void setMinInv(Integer minInv) {
+        this.minInv = minInv;
     }
 
     public long getId() {
@@ -74,11 +103,11 @@ public abstract class Part implements Serializable {
         this.price = price;
     }
 
-    public int getInv() {
+    public Integer getInv() {
         return inv;
     }
 
-    public void setInv(int inv) {
+    public void setInv(Integer inv) {
         this.inv = inv;
     }
 

@@ -39,3 +39,32 @@ Add a “Buy Now” button to your product list. Your “Buy Now” button must 
 >- Lines 178 - 196: created a buyProduct method with buyproduct GET endpoint in AddProductController.
    (buyProduct fetches the id of the product decrements the inventory and sends success message.
    If inventory is 0, a failure message is sent. The message is displayed in mainscreen.html)
+
+## Task G
+Modify the parts to track maximum and minimum inventory by doing the following:
+•  Add additional fields to the part entity for maximum and minimum inventory.
+•  Modify the sample inventory to include the maximum and minimum fields.
+•  Add to the InhousePartForm and OutsourcedPartForm forms additional text inputs for the inventory so the user can set the maximum and minimum values.
+•  Rename the file the persistent storage is saved to.
+•  Modify the code to enforce that the inventory is between or at the minimum and maximum value.
+
+> validators/ValidInventory.java and validators/InventoryValidator.java created.
+
+> Part.java:
+>- lines 37-43: maxInv and minInv fields added
+>- lines 66-81: getters and setters for maxInv and minInv
+>- line 25: @ValidInventory added for validaton
+
+> Bootstrap.Java
+> lines 49,50,59,60,69,70,80,81,91,92: added set minInv and maxInv for sample inventory
+
+> mainscreen.html:
+>- lines 49,50,59,60: added max and min inventory to ingredients table
+
+> InhousePartForm.html:
+>- lines 24-30: max inventory and min inventory inputs added with p tag to display error message
+>- lines 34-39: p tag to display all error messages
+
+> OutsourcedPartForm.html:
+>- lines 25-31: max inventory and min inventory inputs added with p tag to display error message
+>- lines 35-40: p tag to display all error messages
