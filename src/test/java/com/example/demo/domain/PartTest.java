@@ -3,10 +3,15 @@ package com.example.demo.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Project: demoDarbyFrameworks2-master
@@ -155,5 +160,59 @@ class PartTest {
         partIn.setId(1l);
         partOut.setId(1l);
         assertEquals(partIn.hashCode(),partOut.hashCode());
+    }
+
+    @Test
+    void testMinInv_Has_Error() {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        partIn.setName("pickles");
+        partIn.setPrice(3.0);
+        partIn.setMaxInv(20);
+        partIn.setMinInv(3);
+        partIn.setInv(2);
+        Set<ConstraintViolation<Part>> violations = validator.validate(partIn);
+        ConstraintViolation<Part> violation = violations.iterator().next();
+        assertEquals("Inventory must be at greater than: 2", violation.getMessage());
+    }
+
+    @Test
+    void testMinInv_No_Error() {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        partIn.setName("pickles");
+        partIn.setPrice(3.0);
+        partIn.setMaxInv(20);
+        partIn.setMinInv(3);
+        partIn.setInv(5);
+        Set<ConstraintViolation<Part>> violations = validator.validate(partIn);
+        assertTrue(violations.isEmpty());
+    }
+
+    @Test
+    void testMaxInv_Has_Error() {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        partIn.setName("pickles");
+        partIn.setPrice(3.0);
+        partIn.setMaxInv(20);
+        partIn.setMinInv(3);
+        partIn.setInv(21);
+        Set<ConstraintViolation<Part>> violations = validator.validate(partIn);
+        ConstraintViolation<Part> violation = violations.iterator().next();
+        assertEquals("Inventory must be less than: 21", violation.getMessage());
+    }
+
+    @Test
+    void testMaxInv_No_Error() {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        partIn.setName("pickles");
+        partIn.setPrice(3.0);
+        partIn.setMaxInv(20);
+        partIn.setMinInv(3);
+        partIn.setInv(7);
+        Set<ConstraintViolation<Part>> violations = validator.validate(partIn);
+        assertTrue(violations.isEmpty());
     }
 }
