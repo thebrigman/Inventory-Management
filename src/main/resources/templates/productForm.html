@@ -24,7 +24,7 @@
 
     <p>
     <div th:if="${#fields.hasAnyErrors()}">
-    <ul><li th:each="err: ${#fields.allErrors()}" th:text="${err}"></li></ul>
+    <ul><li th:each="err: ${#fields.allErrors()}" th:text="${err}" class="warn"></li></ul>
     </div>
     </p>
     <p><input type="submit" value="Submit" /></p>

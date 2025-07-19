@@ -68,3 +68,23 @@ Modify the parts to track maximum and minimum inventory by doing the following:
 > OutsourcedPartForm.html:
 >- lines 25-31: max inventory and min inventory inputs added with p tag to display error message
 >- lines 35-40: p tag to display all error messages
+
+## Task H
+Add validation for between or at the maximum and minimum fields. The validation must include the following:
+•  Display error messages for low inventory when adding and updating parts if the inventory is less than the minimum number of parts.
+•  Display error messages for low inventory when adding and updating products lowers the part inventory below the minimum.
+•  Display error messages when adding and updating parts if the inventory is greater than the maximum.
+
+> partError.html created:
+>- partError.html displays the error message
+
+> AddProductController:
+>- line 152: added if statement to check inventory of the associated part
+>- lines 160-165: added logic to display error if associated part is below minInv when attempting to add.
+>- lines 84-93: logic added to direct to parError.html and display error, if product inventory is incremented and associated part is below minimum.
+
+> InhouseParForm.html:
+>- lines 24, 34-38: display error messages when inventory is below minInv or above maxInv
+
+> OutsourcePartForm.html:
+>- lines 25, 35-39: display error messages when inventory is below minInv or above maxInv

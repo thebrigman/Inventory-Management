@@ -81,7 +81,16 @@ public class AddProductController {
                 if(product.getInv()- product2.getInv()>0) {
                     for (Part p : product2.getParts()) {
                         int inv = p.getInv();
-                        p.setInv(inv - (product.getInv() - product2.getInv()));
+                        int partInvUpdate = inv - (product.getInv() - product2.getInv());
+
+                        // Add error message when part inventory would go below minimum
+                        if (partInvUpdate < p.getMinInv()) {
+                            theModel.addAttribute("partIdDisplay",  p.getName() +
+                                    " inventory is to low. Current inventory is (" + p.getInv() + ") the minimum inventory is (" + p.getMinInv() + ").");
+                            return "partError";
+                        }
+
+                        p.setInv(partInvUpdate);
                         partService1.save(p);
                     }
                 }
@@ -141,11 +150,22 @@ public class AddProductController {
             return "saveproductscreen";
         }
         else{
-        product1.getParts().add(partService.findById(theID));
-        partService.findById(theID).getProducts().add(product1);
-        ProductService productService = context.getBean(ProductServiceImpl.class);
-        productService.save(product1);
-        partService.save(partService.findById(theID));
+            Part part = partService.findById(theID);
+            if (part.getInv() > part.getMinInv()) {
+                product1.getParts().add(part);
+                part.getProducts().add(product1);
+                ProductService productService = context.getBean(ProductServiceImpl.class);
+                productService.save(product1);
+                partService.save(part);
+            } else {
+                // Add error message when part inventory would go below minimum
+                theModel.addAttribute("partIdDisplay", "Not enough inventory for " + part.getName() +
+                    ". Current inventory (" + part.getInv() + ") is below minimum (" + part.getMinInv() + ").");
+
+                return "partError";
+            }
+        }
+        
         theModel.addAttribute("product", product1);
         theModel.addAttribute("assparts",product1.getParts());
         List<Part>availParts=new ArrayList<>();
@@ -153,7 +173,7 @@ public class AddProductController {
             if(!product1.getParts().contains(p))availParts.add(p);
         }
         theModel.addAttribute("availparts",availParts);
-        return "productForm";}
+        return "productForm";
  //        return "confirmationassocpart";
     }
     @GetMapping("/removepart")
