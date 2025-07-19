@@ -89,9 +89,15 @@ Add validation for between or at the maximum and minimum fields. The validation 
 > OutsourcePartForm.html:
 >- lines 25, 35-39: Display error messages when inventory is below minInv or above maxInv.
 
+## Task I
+Add at least two unit tests for the maximum and minimum fields to the PartTest class in the test package.
 > PartTest.Java:
 >- lines 164-217: Added 4 unit tests. 
 >- testMinInv_Has_Error: Tests the minInv for an error, if the inventory is set below the minInv.
 >- testMinInv_No_Error: Tests the minInv for no error, if the inventory is set between the minInv and maxInv.
 >- testMaxInv_Has_Error: Tests the maxInv for an error, if the inventory is set above the maxInv.
 >- testMaxInv_No_Error: Tests the maxInv for no error, if the inventory is between the minInv and maxInv.
+
+## Task J
+Remove the class files for any unused validators in order to clean your code.
+> Removed unused validators. DeletePartValidator.Java and ValidDeletePart.Java were removed.
